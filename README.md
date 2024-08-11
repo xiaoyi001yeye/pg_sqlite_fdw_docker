@@ -52,9 +52,8 @@ sqlite3 call_log.db
 ```shell
 chmod 666 call_log.db
 ```
-8. 移动数据库文件：
-如果你需要将数据库文件移动到特定的目录：
+8. 通过dockercompose挂载数据库文件：
 
 ```
-COPY call_log.db /tmp/call_log.db
+  - ./call_log.db:/tmp/call_log.db
 ```

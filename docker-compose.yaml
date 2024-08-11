@@ -13,6 +13,9 @@ services:
       POSTGRES_DB: test
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./call_log.db:/tmp/call_log.db
+    networks:
+      - pgtest_network
   grafana:
     image: grafana/grafana
     environment:
@@ -27,3 +30,8 @@ services:
       - "3000:3000"
     depends_on:
       - pg
+    networks:
+      - pgtest_network
+networks:
+  pgtest_network:
+    driver: bridge
