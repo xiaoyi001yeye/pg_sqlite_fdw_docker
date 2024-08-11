@@ -1,7 +1,10 @@
 version: "3"
 services:
   pg:
-    image: postgres:12.1-alpine
+    # image: postgres:12.1-alpine
+    build:
+      context: ./pg14
+      dockerfile: Dockerfile
     ports:
       - "5433:5432"
     environment:
