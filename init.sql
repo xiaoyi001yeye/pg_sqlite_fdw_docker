@@ -1,3 +1,16 @@
+create extension sqlite_fdw;
+CREATE SERVER sqlite_server FOREIGN DATA WRAPPER sqlite_fdw options (database '/tmp/call_log.db');
+GRANT USAGE ON FOREIGN SERVER sqlite_server TO postgres;
+
+CREATE FOREIGN TABLE call_logs (
+    id INTEGER,
+    call_date DATE,
+    call_time TIME,
+    incoming_number VARCHAR(20),
+    duration INTEGER
+) SERVER sqlite_server OPTIONS (
+    table 'call_logs'  
+);
 
 -- 创建 products 表
 CREATE TABLE IF NOT EXISTS public.products (

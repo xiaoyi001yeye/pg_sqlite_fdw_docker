@@ -15,8 +15,3 @@ FROM postgres:14.13
 ## sqlite-fdw
 COPY --from=sqlite-fdw-builder /usr/lib/postgresql/14/lib/ /usr/lib/postgresql/14/lib/
 COPY --from=sqlite-fdw-builder /usr/share/postgresql/14/extension/ /usr/share/postgresql/14/extension/
-
-RUN su postgres -c "pg_ctl -D ${PGDATA} start" && \
-    psql -c "create extension sqlite_fdw" postgres postgres && \
-    psql -c "CREATE SERVER sqlite_server FOREIGN DATA WRAPPER sqlite_fdw options (database '/tmp/call_log.db');" postgres postgres && \
-    psql -c "GRANT USAGE ON FOREIGN SERVER sqlite_server TO postgres" postgres postgres
