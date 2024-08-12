@@ -2,7 +2,7 @@
 FROM postgres:14.13 as sqlite-fdw-builder
 ARG SQLITE_FDW_VERSION=v2.4.0
 ARG SQLITE_FDW_URL=https://github.com/pgspider/sqlite_fdw/archive/refs/tags/${SQLITE_FDW_VERSION}.tar.gz
-COPY sources.list /etc/apt/
+#COPY sources.list /etc/apt/
 RUN apt-get update \
     && apt-get install -y --no-install-recommends pgxnclient wget ca-certificates make g++ cmake pkg-config postgresql-server-dev-14 libsqlite3-dev \
     && mkdir -p /tmp/sqlite_fdw \

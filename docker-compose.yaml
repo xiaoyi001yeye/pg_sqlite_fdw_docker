@@ -16,18 +16,12 @@ services:
       - ./call_log.db:/tmp/call_log.db
     networks:
       - pgtest_network
-  grafana:
-    image: grafana/grafana
+  pgweb:
+    image: sosedoff/pgweb
     environment:
-      GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: admin
-      GF_DATABASE_TYPE: postgres
-      GF_DATABASE_HOST: postgres:5433
-      GF_DATABASE_NAME: test
-      GF_DATABASE_USER: postgres
-      GF_DATABASE_PASSWORD: postgres
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5433/test
     ports:
-      - "3000:3000"
+      - "8081:8081"
     depends_on:
       - pg
     networks:
